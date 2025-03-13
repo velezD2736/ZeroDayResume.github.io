@@ -1,10 +1,194 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My GitHub Pages Site</title>
-  </head>
-  <body>
-    <h1>Hello world!</h1>
-    <p>Welcome to my GitHub Pages site!</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cybersecurity Dashboard Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Share Tech Mono', monospace;
+      background-color: #0f111a;
+      color: #00ffcc;
+    }
+
+    header {
+      background-color: #1f2233;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #00ffcc;
+    }
+
+    h1, h2 {
+      color: #00ffcc;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #1f2233;
+      padding: 20px;
+      border: 1px solid #00ffcc33;
+      border-radius: 8px;
+    }
+
+    .card table {
+      width: 100%;
+      color: #00ffcc;
+    }
+
+    .card table td {
+      padding: 5px 10px;
+    }
+
+    .section-title {
+      margin-top: 0;
+      border-bottom: 1px solid #00ffcc33;
+      padding-bottom: 10px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+      color: #00ffcc88;
+      border-top: 1px solid #00ffcc33;
+    }
+
+    a {
+      color: #00ffff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    canvas {
+      max-width: 100%;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🛡️ Cybersecurity Resume Dashboard</h1>
+    <p>John Doe – Cybersecurity Analyst</p>
+    <p>Email: johndoe@cybersec.com | LinkedIn: /john-doe-sec | GitHub: /cyberdoe</p>
+  </header>
+
+  <section class="dashboard">
+
+    <div class="card">
+      <h2 class="section-title">🔍 Profile Snapshot</h2>
+      <table>
+        <tr><td>🎯 Role</td><td>Cybersecurity Analyst</td></tr>
+        <tr><td>🧠 Experience</td><td>5+ years</td></tr>
+        <tr><td>📍 Location</td><td>Remote / USA</td></tr>
+        <tr><td>🛠️ Tools</td><td>Splunk, Nmap, CrowdStrike, Wireshark</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2 class="section-title">📜 Certifications</h2>
+      <ul>
+        <li>CISSP – (ISC)² – 2023</li>
+        <li>CompTIA Security+ – 2021</li>
+        <li>Certified Ethical Hacker (CEH) – 2022</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2 class="section-title">🧾 Work Experience</h2>
+      <strong>🔐 SOC Analyst – CyberSecure Inc. (2021–Present)</strong>
+      <ul>
+        <li>Monitored SIEM dashboards and reduced threat response time by 40%</li>
+        <li>Automated incident playbooks using Python & Bash</li>
+      </ul>
+      <br>
+      <strong>🕵️ Cybersecurity Analyst – Infosec Corp (2018–2021)</strong>
+      <ul>
+        <li>Performed vulnerability scans across 200+ endpoints</li>
+        <li>Investigated phishing and malware threats using Splunk & CrowdStrike</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2 class="section-title">📊 Technical Skills</h2>
+      <table>
+        <tr><td>SIEM</td><td>Splunk, ELK, QRadar</td></tr>
+        <tr><td>Vuln Scanning</td><td>Nessus, OpenVAS</td></tr>
+        <tr><td>Network</td><td>Wireshark, TCPDump</td></tr>
+        <tr><td>Cloud</td><td>AWS IAM, Azure Defender</td></tr>
+        <tr><td>Languages</td><td>Python, Bash, PowerShell</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2 class="section-title">📈 Skills Proficiency</h2>
+      <canvas id="skillsChart" width="400" height="200"></canvas>
+    </div>
+
+  </section>
+
+  <div class="footer">
+    Resume Dashboard UI © 2025 | Designed for cybersecurity professionals.
+  </div>
+
+  <!-- Chart.js Integration -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('skillsChart').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['SIEM', 'Networking', 'Scripting', 'Incident Response'],
+        datasets: [{
+          label: 'Proficiency (%)',
+          data: [90, 85, 80, 75],
+          backgroundColor: 'rgba(0, 255, 204, 0.6)',
+          borderColor: '#00ffcc',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: '#00ffcc'
+            }
+          },
+          x: {
+            ticks: {
+              color: '#00ffcc'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: {
+              color: '#00ffcc'
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
 </html>
+
