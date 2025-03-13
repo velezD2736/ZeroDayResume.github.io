@@ -1,253 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cybersecurity Resume Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
       margin: 0;
-      background-color: #1e1e2f;
-      color: #c5c6c7;
-      font-family: 'Roboto Mono', monospace;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1a1a1a;
+      color: #f0f0f0;
     }
 
-    header {
-      background-color: #2c2f48;
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 220px;
+      height: 100%;
+      background-color: #00b3e6;
       padding: 20px;
-      text-align: center;
-      color: #66fcf1;
+      box-sizing: border-box;
+    }
+
+    .sidebar h2 {
+      color: white;
+      font-size: 20px;
+      margin-top: 0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin: 10px 0;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    /* Main Dashboard */
+    .main {
+      margin-left: 240px;
+      padding: 20px;
+    }
+
+    .dashboard-title {
+      color: #00ffff;
       font-size: 24px;
-      border-bottom: 1px solid #45a29e;
+      margin-bottom: 20px;
     }
 
-    .dashboard {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: minmax(200px, auto);
-      gap: 20px;
+    .metrics {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 20px;
+    }
+
+    .metric-box {
+      background-color: #252525;
       padding: 20px;
-    }
-
-    .card {
-      background-color: #2c2f48;
-      border: 1px solid #45a29e;
+      border: 1px solid #444;
       border-radius: 5px;
-      padding: 15px;
-      box-shadow: 0 0 10px #000;
+      flex: 1;
+      text-align: center;
     }
 
-    .card h3 {
-      color: #66fcf1;
+    .metric-number {
+      font-size: 32px;
+      color: #00ffff;
+    }
+
+    .charts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 20px;
+    }
+
+    .chart-box {
+      background-color: #252525;
+      padding: 20px;
+      border: 1px solid #444;
+      border-radius: 5px;
+    }
+
+    .chart-box h3 {
+      color: #00ffff;
+      font-size: 16px;
       margin-top: 0;
       margin-bottom: 10px;
-      font-size: 16px;
-      border-bottom: 1px solid #45a29e;
-      padding-bottom: 5px;
     }
 
     canvas {
-      width: 100% !important;
-      height: 160px !important;
+      background-color: #1a1a1a;
     }
 
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #555;
       font-size: 12px;
-      color: #c5c6c7;
     }
 
-    .data-table th, .data-table td {
-      border: 1px solid #45a29e;
-      padding: 5px 10px;
-    }
-
-    .data-table th {
-      background-color: #0b0c1a;
-      color: #66fcf1;
-    }
-
-    @media (max-width: 1000px) {
-      .dashboard {
-        grid-template-columns: 1fr;
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .main {
+        margin-left: 0;
       }
     }
   </style>
 </head>
 <body>
 
-<header>
-  🛡️ Cybersecurity Resume Dashboard
-</header>
-
-<section class="dashboard">
-  <!-- Area Chart -->
-  <div class="card" style="grid-column: span 2;">
-    <h3>Events Over Time</h3>
-    <canvas id="areaChart"></canvas>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>📊 Kibana Style</h2>
+    <ul>
+      <li>Dashboard</li>
+      <li>Certifications</li>
+      <li>Skills</li>
+      <li>Work History</li>
+      <li>Projects</li>
+    </ul>
   </div>
 
-  <!-- Map Placeholder -->
-  <div class="card">
-    <h3>Global Exposure Map</h3>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/World_map_blank_without_borders.svg/800px-World_map_blank_without_borders.svg.png" style="width:100%; height:160px; object-fit: cover; opacity: 0.7;" alt="Map">
+  <!-- Main Content -->
+  <div class="main">
+    <div class="dashboard-title">🛡️ Cybersecurity Resume Dashboard</div>
+
+    <!-- Metrics -->
+    <div class="metrics">
+      <div class="metric-box">
+        <div class="metric-number">6+</div>
+        <div>Years Experience</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">12</div>
+        <div>Certifications</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-number">24</div>
+        <div>Completed Projects</div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts">
+
+      <!-- Line Chart -->
+      <div class="chart-box">
+        <h3>Total Incidents Over Time</h3>
+        <canvas id="lineChart"></canvas>
+      </div>
+
+      <!-- Donut Chart -->
+      <div class="chart-box">
+        <h3>Certifications Breakdown</h3>
+        <canvas id="donutChart"></canvas>
+      </div>
+
+      <!-- Pie Chart -->
+      <div class="chart-box">
+        <h3>Top Skills</h3>
+        <canvas id="pieChart"></canvas>
+      </div>
+
+      <!-- Bar Chart -->
+      <div class="chart-box">
+        <h3>Skill Proficiency</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      Cybersecurity Resume Dashboard • Kibana-style UI • Built with Chart.js + HTML + CSS
+    </div>
   </div>
 
-  <!-- Pie Charts -->
-  <div class="card">
-    <h3>Certifications</h3>
-    <canvas id="certsPie"></canvas>
-  </div>
-
-  <div class="card">
-    <h3>Skill Volume</h3>
-    <canvas id="volumePie"></canvas>
-  </div>
-
-  <div class="card">
-    <h3>Top Skills</h3>
-    <canvas id="skillsPie"></canvas>
-  </div>
-
-  <!-- Bar Chart -->
-  <div class="card" style="grid-column: span 3;">
-    <h3>Skills Breakdown</h3>
-    <canvas id="barChart"></canvas>
-  </div>
-
-  <!-- Resume Table -->
-  <div class="card" style="grid-column: span 3;">
-    <h3>Work History</h3>
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Company</th>
-          <th>Role</th>
-          <th>Duration</th>
-          <th>Key Skills</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>CyberSecure Inc.</td>
-          <td>SOC Analyst</td>
-          <td>2021–Present</td>
-          <td>Splunk, Python, IR</td>
-        </tr>
-        <tr>
-          <td>Infosec Corp</td>
-          <td>Cybersecurity Analyst</td>
-          <td>2018–2021</td>
-          <td>Nessus, Phishing Analysis</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<script>
-  // Area Chart
-  new Chart(document.getElementById("areaChart"), {
-    type: 'line',
-    data: {
-      labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
-      datasets: [{
-        label: 'Threat Events',
-        data: [5, 15, 10, 25, 18, 10],
-        fill: true,
-        backgroundColor: 'rgba(102, 252, 241, 0.2)',
-        borderColor: '#66fcf1',
-        tension: 0.3
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { labels: { color: '#c5c6c7' } }
+  <!-- Chart.js Config -->
+  <script>
+    // Line Chart
+    new Chart(document.getElementById("lineChart"), {
+      type: 'line',
+      data: {
+        labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+        datasets: [{
+          label: 'Threat Events',
+          data: [500, 1000, 750, 1300, 900, 650],
+          fill: false,
+          borderColor: '#00ffff',
+          tension: 0.3,
+          pointBackgroundColor: '#00ffff',
+        }]
       },
-      scales: {
-        x: { ticks: { color: '#c5c6c7' } },
-        y: { ticks: { color: '#c5c6c7' }, beginAtZero: true }
+      options: {
+        animation: false,
+        plugins: {
+          legend: {
+            labels: { color: '#fff' }
+          }
+        },
+        scales: {
+          x: { ticks: { color: '#aaa' } },
+          y: { ticks: { color: '#aaa' }, beginAtZero: true }
+        }
       }
-    }
-  });
+    });
 
-  // Pie Charts
-  new Chart(document.getElementById("certsPie"), {
-    type: 'doughnut',
-    data: {
-      labels: ['CISSP', 'Security+', 'CEH'],
-      datasets: [{
-        data: [40, 35, 25],
-        backgroundColor: ['#45a29e', '#66fcf1', '#c5c6c7']
-      }]
-    },
-    options: {
-      plugins: {
-        legend: { labels: { color: '#c5c6c7' } }
-      }
-    }
-  });
-
-  new Chart(document.getElementById("volumePie"), {
-    type: 'doughnut',
-    data: {
-      labels: ['Python', 'Bash', 'PowerShell'],
-      datasets: [{
-        data: [50, 30, 20],
-        backgroundColor: ['#66fcf1', '#45a29e', '#c5c6c7']
-      }]
-    },
-    options: {
-      plugins: {
-        legend: { labels: { color: '#c5c6c7' } }
-      }
-    }
-  });
-
-  new Chart(document.getElementById("skillsPie"), {
-    type: 'pie',
-    data: {
-      labels: ['SIEM', 'IR', 'Vuln Scanning', 'Cloud Sec'],
-      datasets: [{
-        data: [30, 25, 25, 20],
-        backgroundColor: ['#66fcf1', '#c5c6c7', '#45a29e', '#1f2833']
-      }]
-    },
-    options: {
-      plugins: {
-        legend: { labels: { color: '#c5c6c7' } }
-      }
-    }
-  });
-
-  // Bar Chart
-  new Chart(document.getElementById("barChart"), {
-    type: 'bar',
-    data: {
-      labels: ['Splunk', 'Nmap', 'AWS IAM', 'Wireshark', 'Nessus'],
-      datasets: [{
-        label: 'Proficiency',
-        data: [90, 80, 75, 70, 85],
-        backgroundColor: '#45a29e'
-      }]
-    },
-    options: {
-      plugins: {
-        legend: { labels: { color: '#c5c6c7' } }
+    // Donut Chart
+    new Chart(document.getElementById("donutChart"), {
+      type: 'doughnut',
+      data: {
+        labels: ['CISSP', 'Security+', 'CEH', 'AWS Sec', 'PEN-200'],
+        datasets: [{
+          data: [30, 25, 20, 15, 10],
+          backgroundColor: ['#00ffff', '#ff4d6d', '#ffcc00', '#44cc44', '#8e44ad']
+        }]
       },
-      scales: {
-        x: { ticks: { color: '#c5c6c7' } },
-        y: { ticks: { color: '#c5c6c7' }, beginAtZero: true }
+      options: {
+        plugins: {
+          legend: {
+            labels: { color: '#fff' }
+          }
+        }
       }
-    }
-  });
-</script>
+    });
+
+    // Pie Chart
+    new Chart(document.getElementById("pieChart"), {
+      type: 'pie',
+      data: {
+        labels: ['SIEM', 'Cloud Sec', 'Endpoint', 'Phishing Analysis'],
+        datasets: [{
+          data: [40, 25, 20, 15],
+          backgroundColor: ['#00ffff', '#ff6384', '#36a2eb', '#ffcd56']
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            labels: { color: '#fff' }
+          }
+        }
+      }
+    });
+
+    // Bar Chart
+    new Chart(document.getElementById("barChart"), {
+      type: 'bar',
+      data: {
+        labels: ['Splunk', 'Wireshark', 'AWS IAM', 'Nessus', 'Python'],
+        datasets: [{
+          label: 'Proficiency %',
+          data: [90, 80, 75, 70, 85],
+          backgroundColor: '#00ffff'
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            labels: { color: '#fff' }
+          }
+        },
+        scales: {
+          x: { ticks: { color: '#aaa' } },
+          y: { ticks: { color: '#aaa' }, beginAtZero: true }
+        }
+      }
+    });
+  </script>
 
 </body>
 </html>
