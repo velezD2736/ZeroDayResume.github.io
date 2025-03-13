@@ -3,15 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cybersecurity Resume Dashboard</title>
-
-  <!-- Chart.js -->
+  <title>ZeroDay Cybersecurity Resume Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Leaflet Map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-
   <style>
     body {
       margin: 0;
@@ -31,6 +26,7 @@
     .sidebar h2 { color: white; font-size: 20px; margin-top: 0; }
     .sidebar ul { list-style: none; padding: 0; }
     .sidebar ul li { margin: 10px 0; color: #fff; cursor: pointer; }
+
     .main {
       margin-left: 240px;
       padding: 20px;
@@ -38,8 +34,9 @@
     .dashboard-title {
       color: #00ffff;
       font-size: 24px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
+
     .metrics {
       display: flex;
       gap: 40px;
@@ -59,24 +56,29 @@
       font-size: 32px;
       color: #00ffff;
     }
+
     .charts {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 20px;
     }
+
     .chart-box, .table-box {
       background-color: #252525;
       padding: 20px;
       border: 1px solid #444;
       border-radius: 5px;
     }
+
     .chart-box h3, .table-box h3 {
       color: #00ffff;
       font-size: 16px;
       margin-top: 0;
       margin-bottom: 10px;
     }
+
     canvas { background-color: #1a1a1a; }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -92,21 +94,38 @@
       background-color: #333;
       color: #00ffff;
     }
+
     #map {
       width: 100%;
       height: 300px;
       border-radius: 4px;
       border: 1px solid #444;
     }
+
     .footer {
       text-align: center;
       margin-top: 40px;
       color: #555;
       font-size: 12px;
     }
+
     @media (max-width: 768px) {
       .sidebar { display: none; }
       .main { margin-left: 0; }
+    }
+
+    .top-controls {
+      text-align: right;
+      margin-bottom: 10px;
+    }
+
+    .top-controls button {
+      padding: 8px 16px;
+      background: #00b3e6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -123,7 +142,11 @@
   </div>
 
   <div class="main">
-    <div class="dashboard-title">🛡️ Cybersecurity Resume Dashboard</div>
+    <div class="dashboard-title">🛡️ ZeroDay Cybersecurity Resume Dashboard</div>
+
+    <div class="top-controls">
+      <button onclick="window.print()">🖨️ Print / Export to PDF</button>
+    </div>
 
     <div class="metrics">
       <div class="metric-box">
@@ -179,12 +202,17 @@
       <div id="map"></div>
     </div>
 
+    <div class="chart-box" style="margin-top: 40px; text-align:center;">
+      <h3>📱 QR Code – View This Dashboard</h3>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=https://velezD2736.github.io/ZeroDayResume/&size=150x150" alt="QR Code">
+      <p><img src="https://komarev.com/ghpvc/?username=velezD2736&label=Visitors&color=blue" alt="View Counter"/></p>
+    </div>
+
     <div class="footer">
-      Kibana-Style Cybersecurity Dashboard • Powered by Chart.js & Leaflet.js
+      Cybersecurity Resume Dashboard • Built by velezD2736 • GitHub Pages + Chart.js + Leaflet.js
     </div>
   </div>
 
-  <!-- Embedded Resume Data -->
   <script>
     const resumeData = {
       metrics: {
@@ -258,11 +286,8 @@
         }
       ]
     };
-  </script>
 
-  <!-- Final Rendering Logic -->
-  <script>
-    // Populate metrics
+    // Update metrics
     document.getElementById("expYears").textContent = resumeData.metrics.experienceYears + "+";
     document.getElementById("certs").textContent = resumeData.metrics.certifications;
     document.getElementById("projects").textContent = resumeData.metrics.projects;
@@ -290,7 +315,6 @@
         }]
       },
       options: {
-        animation: false,
         plugins: { legend: { labels: { color: '#fff' } } },
         scales: {
           x: { ticks: { color: '#aaa' } },
@@ -346,7 +370,7 @@
       }
     });
 
-    // Map
+    // Leaflet Map
     const map = L.map('map').setView([30, -90], 3);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap',
